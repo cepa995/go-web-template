@@ -1,0 +1,145 @@
+{{define "base"}}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=devide-width, initial-scale=1,
+            shrint-to-fit=no">
+        <meta http-equiv="X-UA-COmpatible" content="IE-edge">
+
+        {{block "title" .}} 
+        
+        {{end}}
+        <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet"> 
+        <!-- Animate CSS-->
+        <link rel="stylesheet" href="/assets/static/css/other/animate.css">
+        <!-- Bootstrap CSS -->
+        <link href="/assets/static/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+        
+        <!-- Font Awesome CSS-->
+        <link href="/assets/static/css/other/icons.css" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/16aa9a9fc2.js" crossorigin="anonymous"></script>
+        <title></title>
+ 
+    </head>
+    
+    {{block "css" .}}
+
+
+    {{end}}
+
+    <body>
+        {{block "content" .}}
+
+        {{end}}
+        <!-- JQuery -->
+        <script src="/assets/js/jquery/jquery.min.js"></script>
+        <!-- WOW.js -->
+        <script
+            src="/assets/js/wow/wow.min.js"></script>
+        <!-- Bootstrap JS -->
+        <script src="/assets/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- SweetAlert2-->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            (function () {
+                'use strict'
+                var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+                tooltipTriggerList.forEach(function (tooltipTriggerEl) {
+                    new bootstrap.Tooltip(tooltipTriggerEl)
+                })
+            })();
+        
+
+            let attention = Prompt();
+
+            function notify(msg, msgType) {
+                notie.alert({
+                    type: msgType,
+                    text: msg,
+                })
+            }
+
+            function notifyModal(title, text, icon, confirmationButtonText) {
+                Swal.fire({
+                    title: title,
+                    html: text,
+                    icon: icon,
+                    confirmButtonText: confirmationButtonText
+                })
+            }
+
+            function Prompt() {
+                let toast = function (c) {
+                    const{
+                        msg = '',
+                        icon = 'success',
+                        position = 'top-end',
+
+                    } = c;
+
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        title: msg,
+                        position: position,
+                        icon: icon,
+                        showConfirmButton: false,
+                        timer: 500,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    })
+
+                    Toast.fire({})
+                }
+
+                let success = function (c) {
+                    const {
+                        msg = "",
+                        title = "",
+                        footer = "",
+                    } = c
+
+                    Swal.fire({
+                        postion: 'top-end',
+                        icon: 'success',
+                        title: title,
+                        text: msg,
+                        footer: footer,
+                    })
+
+                }
+
+                let error = function (c) {
+                    const {
+                        msg = "",
+                        title = "",
+                        footer = "",
+                    } = c
+
+                    Swal.fire({
+                        icon: 'error',
+                        title: title,
+                        text: msg,
+                        footer: footer,
+                    })
+
+                }
+
+                return {
+                    toast: toast,
+                    success: success,
+                    error: error,
+                }
+            }
+
+    </script>
+    {{block "js" .}}
+
+    {{end}}
+
+    </body>
+</html>
+{{end}}

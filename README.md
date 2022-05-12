@@ -1,2 +1,2 @@
-# go-web-template
-WEB Application Template writen in Go Programming Language
+# golang-web-app-template
+Web Application Template written in GoLang
